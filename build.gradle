@@ -1,0 +1,36 @@
+plugins {
+    id 'forge-gradle' version '6.0.16'
+    id 'eclipse'
+    id 'maven-publish'
+}
+
+group = 'com.octothink.soundboard'
+version = '1.0.0'
+archivesBaseName = 'soundboard'
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYEVENTS'
+            property 'forge.logging.level.root', 'info'
+            mods {
+                soundboard {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
+}
+
+sourceSets.main.resources { srcDir 'src/main/resources' }
